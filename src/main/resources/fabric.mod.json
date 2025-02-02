@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "basecore",
+	"version": "${version}",
+	"name": "BaseCore",
+	"description": "This is a Minecraft Library for many Aspects like Text Formatting and Discord Rich Presence.",
+	"authors": [
+		"Blonicx"
+	],
+	"contact": {
+
+	},
+	"license": "MIT",
+	"icon": "assets/basecore/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.blonicx.basecore.BaseCore"
+		]
+	},
+	"mixins": [
+		"basecore.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.*",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
