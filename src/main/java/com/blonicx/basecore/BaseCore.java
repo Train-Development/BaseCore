@@ -1,6 +1,5 @@
 package com.blonicx.basecore;
 
-import com.blonicx.basecore.api.utils.text.placeholder.PlaceholderRegistry;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -14,6 +13,5 @@ public class BaseCore implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("BaseCore initialized.");
-		PlaceholderRegistry.loadPlaceholdersFromDirectory("./api/utils/text/placeholders");
 	}
 }
