@@ -2,7 +2,6 @@ package com.blonicx.basecore;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientChunkEvents;
 import com.blonicx.basecore.api.utils.text.placeholder.PlaceholderRegistry;
 
 public class BaseCoreClient implements ClientModInitializer {
