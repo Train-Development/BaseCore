@@ -1,7 +1,5 @@
 package com.blonicx.basecore.api.utils.text.placeholder;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 

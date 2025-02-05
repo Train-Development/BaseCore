@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.utils.text;
+package com.blonicx.basecore.api.utils.io;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
