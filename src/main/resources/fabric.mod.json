@@ -3,7 +3,7 @@
 	"id": "basecore",
 	"version": "${version}",
 	"name": "BaseCore",
-	"description": "This is a Minecraft Library for many Aspects like Text Formatting and Discord Rich Presence.",
+	"description": "This is a Minecraft Library with many utils and gui api.",
 	"authors": [
 		"Blonicx"
 	],
@@ -16,6 +16,9 @@
 	"entrypoints": {
 		"main": [
 			"com.blonicx.basecore.BaseCore"
+		],
+		"client": [
+			"com.blonicx.basecore.BaseCoreClient"
 		]
 	},
 	"mixins": [

@@ -3,7 +3,7 @@
 	"package": "com.blonicx.basecore.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+      "MixinScreenHandler"
 	],
 	"injectors": {
 		"defaultRequire": 1
