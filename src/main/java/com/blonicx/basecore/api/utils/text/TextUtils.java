@@ -8,7 +8,7 @@ import net.minecraft.util.Formatting;
 
 import java.awt.*;
 
-public class TextAPI {
+public class TextUtils {
      // Creates colored text with optional styles. //
     public static Text coloredText(String message, int color, boolean bold, boolean italic) {
         Style style = Style.EMPTY
@@ -44,13 +44,16 @@ public class TextAPI {
         return new Color(r, g, b).getRGB();
     }
 
-    // Creates a rainbow text effect. //
+    // Creates a smoothly transitioning rainbow text effect
     public static Text rainbowText(String text) {
         MutableText finalText = Text.literal("");
-        int[] rainbowColors = {0xFF0000, 0xFF7F00, 0xFFFF00, 0x00FF00, 0x0000FF, 0x4B0082, 0x8B00FF};
+        int textLength = text.length();
 
-        for (int i = 0; i < text.length(); i++) {
-            int color = rainbowColors[i % rainbowColors.length];
+        for (int i = 0; i < textLength; i++) {
+            // Cycle through the full 360° hue spectrum
+            float hue = (float) i / textLength;
+            int color = Color.HSBtoRGB(hue, 1.0f, 1.0f);
+
             finalText.append(coloredText(String.valueOf(text.charAt(i)), color, false, false));
         }
 

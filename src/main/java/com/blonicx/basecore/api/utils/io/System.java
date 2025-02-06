@@ -1,10 +1,10 @@
 package com.blonicx.basecore.api.utils.io;
 
-public class SystemAPI {
+public class System {
     private static Runtime runtime = Runtime.getRuntime();
 
     public static String osName() {
-        return System.getProperty("os.name");
+        return java.lang.System.getProperty("os.name");
     }
 
     public static int availableProcessors() {
