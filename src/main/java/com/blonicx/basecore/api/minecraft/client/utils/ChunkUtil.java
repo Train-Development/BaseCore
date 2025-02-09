@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.minecraft.client;
+package com.blonicx.basecore.api.minecraft.client.utils;
 
 import net.minecraft.client.MinecraftClient;
 
