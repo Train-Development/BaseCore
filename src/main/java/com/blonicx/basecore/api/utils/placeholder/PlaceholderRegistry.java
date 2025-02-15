@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.utils.text.placeholder;
+package com.blonicx.basecore.api.utils.placeholder;
 
 import java.util.HashMap;
 import java.util.Map;
