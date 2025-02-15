@@ -7,16 +7,14 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.text.Text;
 
 public class RoundButtonWidget extends ButtonWidget {
-    private final Text buttonText;
-    private final int normalColor;
-    private final int hoverColor;
+    private final int buttonColor;
     private final int textColor;
+    private final Text buttonText;
 
-    public RoundButtonWidget(int x, int y, int diameter, Text text, PressAction onPress, int normalColor, int hoverColor, int textColor) {
+    public RoundButtonWidget(int x, int y, int diameter, int buttonColor, int textColor, Text text, PressAction onPress) {
         super(x, y, diameter, diameter, text, onPress, DEFAULT_NARRATION_SUPPLIER);
         this.buttonText = text;
-        this.normalColor = normalColor;
-        this.hoverColor = hoverColor;
+        this.buttonColor = buttonColor;
         this.textColor = textColor;
     }
 
@@ -26,10 +24,7 @@ public class RoundButtonWidget extends ButtonWidget {
         int centerY = getY() + getHeight() / 2;
         int radius = getWidth() / 2;
 
-        boolean hovered = isMouseOver(mouseX, mouseY);
-        int color = hovered ? hoverColor : normalColor;
-
-        drawCircle(context, centerX, centerY, radius, color);
+        drawCircle(context, centerX, centerY, radius, buttonColor);
 
         // Get the TextRenderer from MinecraftClient
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
