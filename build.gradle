@@ -23,7 +23,8 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	implementation 'javax.websocket:javax.websocket-api:1.1'  // WebSocket API
+	api 'com.github.twitch4j:twitch4j:1.23.0'
+	api 'com.github.philippheuer.events4j:events4j-handler-simple:0.12.2'
 }
 
 processResources {
