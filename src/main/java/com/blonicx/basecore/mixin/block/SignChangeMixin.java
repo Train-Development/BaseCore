@@ -1,4 +1,4 @@
-package com.blonicx.basecore.mixin;
+package com.blonicx.basecore.mixin.block;
 
 import com.blonicx.basecore.api.minecraft.client.events.blocks.SignChangeEvent;
 import net.minecraft.block.entity.SignBlockEntity;
