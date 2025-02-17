@@ -20,10 +20,17 @@ public class ScreenHandlerMixin {
 		Inventory sourceInventory = player.getInventory();
 
 		// Fetch the slot's destination inventory. This should be a container or the player's inventory.
-		Inventory destinationInventory = player.currentScreenHandler.slots.get(slotId).inventory;
-		ItemStack itemStack = player.getInventory().getStack(slotId);
+		Inventory destinationInventory = slotId >= 0 && slotId < player.currentScreenHandler.slots.size()
+				? player.currentScreenHandler.slots.get(slotId).inventory
+				: null;
+
+		ItemStack itemStack = slotId >= 0 && slotId < player.getInventory().size()
+				? player.getInventory().getStack(slotId)
+				: ItemStack.EMPTY;
 
 		// Trigger the custom ItemTransferEvent when an item is moved
-		ItemTransferEvent.ITEM_TRANSFER.invoker().onItemTransfer(player, sourceInventory, destinationInventory, itemStack);
+		if (destinationInventory != null) {
+			ItemTransferEvent.ITEM_TRANSFER.invoker().onItemTransfer(player, sourceInventory, destinationInventory, itemStack);
+		}
 	}
 }
