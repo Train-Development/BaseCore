@@ -19,7 +19,7 @@ public abstract class GameMenuScreenMixin extends Screen {
 
     @Inject(method = "initWidgets", at = @At("TAIL"))
     private void addFooter(CallbackInfo ci) {
-        TextWidget footer = new TextWidget(this.width / 2, this.height - 20, Footer.getFooter(), textRenderer);
+        TextWidget footer = new TextWidget(this.width, this.height + 200, Footer.getFooter(), textRenderer);
         this.addDrawableChild(footer);
     }
 }
