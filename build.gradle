@@ -25,6 +25,7 @@ dependencies {
 
 	api 'com.github.twitch4j:twitch4j:1.23.0'
 	api 'com.github.philippheuer.events4j:events4j-handler-simple:0.12.2'
+	api 'org.json:json:20250107'
 }
 
 processResources {
