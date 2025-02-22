@@ -7,7 +7,9 @@ import com.blonicx.basecore.api.utils.placeholder.PlaceholderRegistry;
 public class BaseCoreClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        // Registering for ChatMessageEvent //
         ClientReceiveMessageEvents.CHAT.register((message, signed_message, sender, params, timestamp) -> {
+            // Replace placeholders in the message //
             PlaceholderRegistry.processString(String.valueOf(message));
         });
     }
