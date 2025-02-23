@@ -1,11 +1,11 @@
 package com.blonicx.basecore.api.hglabor.enums.stats;
 
-public enum HGLaborGameMode {
+public enum HGLaborGameModes {
     FFA("FFA");
 
     private final String value;
 
-    HGLaborGameMode(String value) {
+    HGLaborGameModes(String value) {
         this.value = value;
     }
 

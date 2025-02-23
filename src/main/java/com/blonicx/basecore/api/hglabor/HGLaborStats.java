@@ -1,7 +1,7 @@
 package com.blonicx.basecore.api.hglabor;
 
 import com.blonicx.basecore.BaseCore;
-import com.blonicx.basecore.api.hglabor.enums.stats.HGLaborGameMode;
+import com.blonicx.basecore.api.hglabor.enums.stats.HGLaborGameModes;
 import com.blonicx.basecore.api.hglabor.enums.stats.HGLaborValues;
 import com.blonicx.basecore.api.minecraft.client.utils.PlayerData;
 import org.json.JSONObject;
@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class HGLaborStats {
     private static final String API_URL = "https://api.hglabor.de/stats/";
 
-    public static JSONArray TopPlayers(HGLaborValues Sort, HGLaborGameMode GameMode, int PlayerCount) throws IOException {
+    public static JSONArray TopPlayers(HGLaborValues Sort, HGLaborGameModes GameMode, int PlayerCount) throws IOException {
         //Set up the Connection //
         URL url = new URL(API_URL + "/" + GameMode + "/top?sort=" + Sort);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -50,7 +50,7 @@ public class HGLaborStats {
     }
 
 
-    public static JSONObject PlayerStats(String PlayerIdentifier, HGLaborGameMode GameMode) throws IOException {
+    public static JSONObject PlayerStats(String PlayerIdentifier, HGLaborGameModes GameMode) throws IOException {
         String UUID;
 
         // Convert PlayerIdentifier to UUID if it is a Username //
@@ -90,7 +90,7 @@ public class HGLaborStats {
         return new JSONObject(response.toString());
     }
 
-    public static String PlayerStat(String PlayerIdentifier, HGLaborGameMode GameMode, HGLaborValues Sort) throws IOException {
+    public static String PlayerStat(String PlayerIdentifier, HGLaborGameModes GameMode, HGLaborValues Sort) throws IOException {
         String UUID;
 
         // Convert PlayerIdentifier to UUID if it is a Username //
