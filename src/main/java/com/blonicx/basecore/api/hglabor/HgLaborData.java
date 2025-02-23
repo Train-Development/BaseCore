@@ -68,4 +68,38 @@ public class HgLaborData {
 
         return new JSONObject(response.toString());
     }
+
+    public static String PlayerStat(String PlayerIdentifier, HGLaborGameMode GameMode, HGLaborValues Sort) throws IOException {
+        String UUID;
+
+        if (PlayerData.isUUID(PlayerIdentifier)) {
+            UUID = PlayerIdentifier;
+        }
+        else {
+            UUID = PlayerData.getUUIDFromUsername(PlayerIdentifier);
+        }
+
+        BaseCore.LOGGER.info("UUID: " + UUID);
+
+        URL url = new URL(API_URL + "/" + GameMode + "/" + UUID);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+        if (conn.getResponseCode() != 200) {
+            return "Error connecting to HgLabor API";
+        }
+
+        Scanner scanner = new Scanner(conn.getInputStream());
+        StringBuilder response = new StringBuilder();
+        while (scanner.hasNext()) {
+            response.append(scanner.nextLine());
+        }
+        scanner.close();
+
+        JSONObject JSONData = new JSONObject(response.toString());
+        String Value = JSONData.get(Sort.toString()).toString();
+
+        return Value;
+    }
 }
