@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class HgLaborData {
+public class HGLaborData {
     private static final String API_URL = "https://api.hglabor.de/stats/";
 
     public static JSONArray TopPlayers(HGLaborValues Sort, HGLaborGameMode GameMode, int PlayerCount) throws IOException {
