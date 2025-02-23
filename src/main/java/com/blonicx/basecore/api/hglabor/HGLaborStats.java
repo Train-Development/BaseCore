@@ -1,8 +1,8 @@
 package com.blonicx.basecore.api.hglabor;
 
 import com.blonicx.basecore.BaseCore;
-import com.blonicx.basecore.api.hglabor.enums.HGLaborGameMode;
-import com.blonicx.basecore.api.hglabor.enums.HGLaborValues;
+import com.blonicx.basecore.api.hglabor.enums.stats.HGLaborGameMode;
+import com.blonicx.basecore.api.hglabor.enums.stats.HGLaborValues;
 import com.blonicx.basecore.api.minecraft.client.utils.PlayerData;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class HGLaborData {
+public class HGLaborStats {
     private static final String API_URL = "https://api.hglabor.de/stats/";
 
     public static JSONArray TopPlayers(HGLaborValues Sort, HGLaborGameMode GameMode, int PlayerCount) throws IOException {
@@ -41,6 +41,9 @@ public class HGLaborData {
         for (int i = 0; i < Math.min(PlayerCount, leaderboard.length()); i++) {
             topPlayers.put(leaderboard.getJSONObject(i));
         }
+
+        // Close the Connection //
+        conn.disconnect();
 
         // Return the Top Players //
         return topPlayers;
@@ -79,6 +82,9 @@ public class HGLaborData {
             response.append(scanner.nextLine());
         }
         scanner.close();
+
+        // Close the Connection //
+        conn.disconnect();
 
         // Return the Players Stats //
         return new JSONObject(response.toString());
@@ -120,6 +126,9 @@ public class HGLaborData {
         // Extract the Value //
         JSONObject JSONData = new JSONObject(response.toString());
         String Value = JSONData.get(Sort.toString()).toString();
+
+        // Close the Connection //
+        conn.disconnect();
 
         // Return the Value //
         return Value;

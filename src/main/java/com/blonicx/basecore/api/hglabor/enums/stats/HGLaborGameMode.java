@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.hglabor.enums;
+package com.blonicx.basecore.api.hglabor.enums.stats;
 
 public enum HGLaborGameMode {
     FFA("FFA");
@@ -9,7 +9,7 @@ public enum HGLaborGameMode {
         this.value = value;
     }
 
-    // Override toString to return the string value directly
+    // Override toString to return the string value directly //
     @Override
     public String toString() {
         return value;
