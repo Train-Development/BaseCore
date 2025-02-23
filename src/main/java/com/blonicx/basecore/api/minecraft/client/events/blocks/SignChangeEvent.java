@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 
 public class SignChangeEvent {
+    // Register the Event //
     public static final Event<SignChangeEventListener> SIGN_CHANGE = EventFactory.createArrayBacked(SignChangeEvent.SignChangeEventListener.class, (listeners) -> (text) -> {
         for (SignChangeEvent.SignChangeEventListener listener : listeners) {
             listener.onSignChange(text);

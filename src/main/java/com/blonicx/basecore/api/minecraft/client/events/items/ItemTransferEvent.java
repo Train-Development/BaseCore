@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.event.EventFactory;
 
 public class ItemTransferEvent {
 
+    // Register the Event //
     public static final Event<ItemTransferEventListener> ITEM_TRANSFER = EventFactory.createArrayBacked(ItemTransferEventListener.class, (listeners) -> (player, sourceInventory, destinationInventory, itemStack) -> {
         for (ItemTransferEventListener listener : listeners) {
             listener.onItemTransfer(player, sourceInventory, destinationInventory, itemStack);

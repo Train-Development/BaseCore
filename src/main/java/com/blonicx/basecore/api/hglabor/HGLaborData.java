@@ -16,13 +16,18 @@ public class HGLaborData {
     private static final String API_URL = "https://api.hglabor.de/stats/";
 
     public static JSONArray TopPlayers(HGLaborValues Sort, HGLaborGameMode GameMode, int PlayerCount) throws IOException {
+        //Set up the Connection //
         URL url = new URL(API_URL + "/" + GameMode + "/top?sort=" + Sort);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+        // Check if connection was successful //
         if (conn.getResponseCode() != 200) {
             return new JSONArray().put(new JSONObject().put("error", "Error connecting to HgLabor API"));
         }
+
+        // Get data from Response //
         Scanner scanner = new Scanner(conn.getInputStream());
         StringBuilder response = new StringBuilder();
         while (scanner.hasNext()) {
@@ -30,17 +35,22 @@ public class HGLaborData {
         }
         scanner.close();
         JSONArray leaderboard = new JSONArray(response.toString());
-        // Extract top 3 players (or fewer if there aren't enough players)
+
+        // Extract the top Players //
         JSONArray topPlayers = new JSONArray();
         for (int i = 0; i < Math.min(PlayerCount, leaderboard.length()); i++) {
             topPlayers.put(leaderboard.getJSONObject(i));
         }
+
+        // Return the Top Players //
         return topPlayers;
     }
+
 
     public static JSONObject PlayerStats(String PlayerIdentifier, HGLaborGameMode GameMode) throws IOException {
         String UUID;
 
+        // Convert PlayerIdentifier to UUID if it is a Username //
         if (PlayerData.isUUID(PlayerIdentifier)) {
             UUID = PlayerIdentifier;
         }
@@ -48,17 +58,21 @@ public class HGLaborData {
             UUID = PlayerData.getUUIDFromUsername(PlayerIdentifier);
         }
 
+        // Log the UUID //
         BaseCore.LOGGER.info("UUID: " + UUID);
 
+        //Set up the Connection //
         URL url = new URL(API_URL + "/" + GameMode + "/" + UUID);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("User-Agent", "Mozilla/5.0");
 
+        // Check if connection was successful //
         if (conn.getResponseCode() != 200) {
             return new JSONObject().put("error", "Error connecting to HgLabor API");
         }
 
+        // Get data from Response //
         Scanner scanner = new Scanner(conn.getInputStream());
         StringBuilder response = new StringBuilder();
         while (scanner.hasNext()) {
@@ -66,12 +80,14 @@ public class HGLaborData {
         }
         scanner.close();
 
+        // Return the Players Stats //
         return new JSONObject(response.toString());
     }
 
     public static String PlayerStat(String PlayerIdentifier, HGLaborGameMode GameMode, HGLaborValues Sort) throws IOException {
         String UUID;
 
+        // Convert PlayerIdentifier to UUID if it is a Username //
         if (PlayerData.isUUID(PlayerIdentifier)) {
             UUID = PlayerIdentifier;
         }
@@ -79,17 +95,21 @@ public class HGLaborData {
             UUID = PlayerData.getUUIDFromUsername(PlayerIdentifier);
         }
 
+        // Log the UUID //
         BaseCore.LOGGER.info("UUID: " + UUID);
 
+        //Set up the Connection //
         URL url = new URL(API_URL + "/" + GameMode + "/" + UUID);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("User-Agent", "Mozilla/5.0");
 
+        // Check if connection was successful //
         if (conn.getResponseCode() != 200) {
             return "Error connecting to HgLabor API";
         }
 
+        // Get data from Response //
         Scanner scanner = new Scanner(conn.getInputStream());
         StringBuilder response = new StringBuilder();
         while (scanner.hasNext()) {
@@ -97,9 +117,11 @@ public class HGLaborData {
         }
         scanner.close();
 
+        // Extract the Value //
         JSONObject JSONData = new JSONObject(response.toString());
         String Value = JSONData.get(Sort.toString()).toString();
 
+        // Return the Value //
         return Value;
     }
 }

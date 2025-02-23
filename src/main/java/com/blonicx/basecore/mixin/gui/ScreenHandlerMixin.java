@@ -16,10 +16,10 @@ public class ScreenHandlerMixin {
 
 	@Inject(method = "onSlotClick", at = @At("HEAD"))
 	private void onSlotClick(int slotId, int button, SlotActionType actionType, PlayerEntity player, CallbackInfo info) {
-		// Fetch the slot's source inventory. This should be the player's inventory.
+		// Fetch the slot's source inventory. This should be the player's inventory. //
 		Inventory sourceInventory = player.getInventory();
 
-		// Fetch the slot's destination inventory. This should be a container or the player's inventory.
+		// Fetch the slot's destination inventory. This should be a container or the player's inventory. //
 		Inventory destinationInventory = slotId >= 0 && slotId < player.currentScreenHandler.slots.size()
 				? player.currentScreenHandler.slots.get(slotId).inventory
 				: null;
@@ -28,7 +28,7 @@ public class ScreenHandlerMixin {
 				? player.getInventory().getStack(slotId)
 				: ItemStack.EMPTY;
 
-		// Trigger the custom ItemTransferEvent when an item is moved
+		// Trigger the custom ItemTransferEvent when an item is moved //
 		if (destinationInventory != null) {
 			ItemTransferEvent.ITEM_TRANSFER.invoker().onItemTransfer(player, sourceInventory, destinationInventory, itemStack);
 		}

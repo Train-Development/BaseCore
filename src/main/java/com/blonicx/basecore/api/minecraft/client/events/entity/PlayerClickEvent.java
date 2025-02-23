@@ -8,6 +8,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class PlayerClickEvent {
+    // Register the Event //
     public static final Event<PlayerClickEventListener> PLAYER_CLICK = EventFactory.createArrayBacked(
             PlayerClickEventListener.class,
             (listeners) -> (clicker, target, hand, world) -> {
