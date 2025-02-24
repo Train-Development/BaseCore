@@ -1,6 +1,6 @@
-package com.blonicx.basecore.api.hglabor.enums.stats;
+package com.blonicx.basecore.api.hglabor.enums.ffa;
 
-public enum HGLaborValues {
+public enum FFAValues {
     KILLS("kills"),
     DEATHS("deaths"),
     BOUNTY("bounty"),
@@ -10,7 +10,7 @@ public enum HGLaborValues {
 
     private final String value;
 
-    HGLaborValues(String value) {
+    FFAValues(String value) {
         this.value = value;
     }
 

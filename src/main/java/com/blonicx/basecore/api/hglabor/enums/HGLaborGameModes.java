@@ -1,12 +1,11 @@
-package com.blonicx.basecore.api.hglabor.enums.ffa;
+package com.blonicx.basecore.api.hglabor.enums;
 
-public enum HGLaborFFAPlayStyles {
-    UHC("UHC"),
-    SOUP("Soup");
+public enum HGLaborGameModes {
+    FFA("FFA");
 
     private final String value;
 
-    HGLaborFFAPlayStyles(String value) {
+    HGLaborGameModes(String value) {
         this.value = value;
     }
 

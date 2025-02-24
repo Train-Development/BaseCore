@@ -1,6 +1,6 @@
 package com.blonicx.basecore.api.hglabor.enums.ffa;
 
-public enum HGLaborFFAHeros {
+public enum FFAHeros {
     KATARA("Katara"),
     AANG("Aang"),
     TOPH("Toph");
@@ -8,7 +8,7 @@ public enum HGLaborFFAHeros {
 
     private final String value;
 
-    HGLaborFFAHeros(String value) {
+    FFAHeros(String value) {
         this.value = value;
     }
 
