@@ -4,8 +4,8 @@ import com.blonicx.basecore.BaseCore;
 import com.blonicx.basecore.api.hglabor.enums.HGLaborGameModes;
 import com.blonicx.basecore.api.hglabor.enums.ffa.FFAValues;
 import com.blonicx.basecore.api.minecraft.client.utils.PlayerData;
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -15,122 +15,60 @@ import java.util.Scanner;
 public class HGLaborStats {
     private static final String API_URL = "https://api.hglabor.de/stats/";
 
-    public static JSONArray TopPlayers(FFAValues Sort, HGLaborGameModes GameMode, int PlayerCount) throws IOException {
-        //Set up the Connection //
-        URL url = new URL(API_URL + "/" + GameMode + "/top?sort=" + Sort);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+    // Helper method to fetch JSON from a URL
+    private static String fetchJson(String urlString) throws IOException {
+        HttpURLConnection conn = null;
+        try {
+            URL url = new URL(urlString);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-        // Check if connection was successful //
-        if (conn.getResponseCode() != 200) {
-            return new JSONArray().put(new JSONObject().put("error", "Error connecting to HgLabor API"));
+            int responseCode = conn.getResponseCode();
+            if (responseCode != 200) {
+                return "{\"error\": \"API request failed with status: " + responseCode + "\"}";
+            }
+
+            try (Scanner scanner = new Scanner(conn.getInputStream())) {
+                StringBuilder response = new StringBuilder();
+                while (scanner.hasNext()) {
+                    response.append(scanner.nextLine());
+                }
+                return response.toString();
+            }
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
         }
+    }
 
-        // Get data from Response //
-        Scanner scanner = new Scanner(conn.getInputStream());
-        StringBuilder response = new StringBuilder();
-        while (scanner.hasNext()) {
-            response.append(scanner.nextLine());
-        }
-        scanner.close();
-        JSONArray leaderboard = new JSONArray(response.toString());
-
-        // Extract the top Players //
+    public static JSONArray TopPlayers(FFAValues sort, HGLaborGameModes gameMode, int playerCount) throws IOException {
+        String jsonResponse = fetchJson(API_URL + gameMode + "/top?sort=" + sort);
+        JSONArray leaderboard = new JSONArray(jsonResponse);
         JSONArray topPlayers = new JSONArray();
-        for (int i = 0; i < Math.min(PlayerCount, leaderboard.length()); i++) {
+
+        for (int i = 0; i < Math.min(playerCount, leaderboard.length()); i++) {
             topPlayers.put(leaderboard.getJSONObject(i));
         }
-
-        // Close the Connection //
-        conn.disconnect();
-
-        // Return the Top Players //
         return topPlayers;
     }
 
+    public static JSONObject PlayerStats(String playerIdentifier, HGLaborGameModes gameMode) throws IOException {
+        String uuid = PlayerData.isUUID(playerIdentifier) ? playerIdentifier : PlayerData.getUUIDFromUsername(playerIdentifier);
+        BaseCore.LOGGER.info("UUID: " + uuid);
 
-    public static JSONObject PlayerStats(String PlayerIdentifier, HGLaborGameModes GameMode) throws IOException {
-        String UUID;
-
-        // Convert PlayerIdentifier to UUID if it is a Username //
-        if (PlayerData.isUUID(PlayerIdentifier)) {
-            UUID = PlayerIdentifier;
-        }
-        else {
-            UUID = PlayerData.getUUIDFromUsername(PlayerIdentifier);
-        }
-
-        // Log the UUID //
-        BaseCore.LOGGER.info("UUID: " + UUID);
-
-        //Set up the Connection //
-        URL url = new URL(API_URL + "/" + GameMode + "/" + UUID);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-        // Check if connection was successful //
-        if (conn.getResponseCode() != 200) {
-            return new JSONObject().put("error", "Error connecting to HgLabor API");
-        }
-
-        // Get data from Response //
-        Scanner scanner = new Scanner(conn.getInputStream());
-        StringBuilder response = new StringBuilder();
-        while (scanner.hasNext()) {
-            response.append(scanner.nextLine());
-        }
-        scanner.close();
-
-        // Close the Connection //
-        conn.disconnect();
-
-        // Return the Players Stats //
-        return new JSONObject(response.toString());
+        String jsonResponse = fetchJson(API_URL + gameMode + "/" + uuid);
+        return new JSONObject(jsonResponse);
     }
 
-    public static String PlayerStat(String PlayerIdentifier, HGLaborGameModes GameMode, FFAValues Sort) throws IOException {
-        String UUID;
+    public static String PlayerStat(String playerIdentifier, HGLaborGameModes gameMode, FFAValues sort) throws IOException {
+        String uuid = PlayerData.isUUID(playerIdentifier) ? playerIdentifier : PlayerData.getUUIDFromUsername(playerIdentifier);
+        BaseCore.LOGGER.info("UUID: " + uuid);
 
-        // Convert PlayerIdentifier to UUID if it is a Username //
-        if (PlayerData.isUUID(PlayerIdentifier)) {
-            UUID = PlayerIdentifier;
-        }
-        else {
-            UUID = PlayerData.getUUIDFromUsername(PlayerIdentifier);
-        }
+        String jsonResponse = fetchJson(API_URL + gameMode + "/" + uuid);
+        JSONObject jsonData = new JSONObject(jsonResponse);
 
-        // Log the UUID //
-        BaseCore.LOGGER.info("UUID: " + UUID);
-
-        //Set up the Connection //
-        URL url = new URL(API_URL + "/" + GameMode + "/" + UUID);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-        // Check if connection was successful //
-        if (conn.getResponseCode() != 200) {
-            return "Error connecting to HgLabor API";
-        }
-
-        // Get data from Response //
-        Scanner scanner = new Scanner(conn.getInputStream());
-        StringBuilder response = new StringBuilder();
-        while (scanner.hasNext()) {
-            response.append(scanner.nextLine());
-        }
-        scanner.close();
-
-        // Extract the Value //
-        JSONObject JSONData = new JSONObject(response.toString());
-        String Value = JSONData.get(Sort.toString()).toString();
-
-        // Close the Connection //
-        conn.disconnect();
-
-        // Return the Value //
-        return Value;
+        return jsonData.optString(String.valueOf(sort), "Stat not found");
     }
 }
