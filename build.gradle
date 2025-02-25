@@ -1,7 +1,6 @@
 plugins {
 	id 'fabric-loom' version '1.9-SNAPSHOT'
 	id 'maven-publish'
-	id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 version = project.mod_version
@@ -24,9 +23,9 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	shadow 'com.github.twitch4j:twitch4j:1.23.0'
-	shadow 'com.github.philippheuer.events4j:events4j-handler-simple:0.12.2'
-	shadow 'org.json:json:20250107'
+	api 'com.github.twitch4j:twitch4j:1.23.0'
+	api 'com.github.philippheuer.events4j:events4j-handler-simple:0.12.2'
+	api 'org.json:json:20250107'
 }
 
 processResources {
