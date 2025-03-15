@@ -22,7 +22,8 @@ public class BaseCoreClient implements ClientModInitializer {
         // Registering the PlayerClickEvent Callbacks //
         AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
             if (entity instanceof PlayerEntity target) {
-                return PlayerClickEvent.PLAYER_CLICK.invoker().onPlayerClick(player, target, hand, world);
+                PlayerClickEvent.PLAYER_CLICK.invoker().onPlayerClick(player, target, hand, world);
+                return ActionResult.SUCCESS;
             }
             return ActionResult.PASS;
         });
@@ -30,8 +31,10 @@ public class BaseCoreClient implements ClientModInitializer {
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
             if (entity instanceof PlayerEntity target) {
                 if (hand == Hand.OFF_HAND) return ActionResult.PASS; // Ignore off-hand interactions
-                return PlayerClickEvent.PLAYER_CLICK.invoker().onPlayerClick(player, target, hand, world);
+                PlayerClickEvent.PLAYER_CLICK.invoker().onPlayerClick(player, target, hand, world);
+                return ActionResult.PASS;
             }
+
             return ActionResult.PASS;
         });
     }
