@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.minecraft.client.gui.elements.buttons;
+package com.blonicx.basecore.api.minecraft.gui.elements.buttons;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;

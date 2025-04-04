@@ -48,15 +48,17 @@ public class Text {
         MutableText finalText = net.minecraft.text.Text.literal("");
         int textLength = text.length();
 
-        for (int i = 0; i < textLength; i++) {
-            // Cycle through the full 360° hue spectrum
-            float hue = (float) i / textLength;
-            int color = Color.HSBtoRGB(hue, 1.0f, 1.0f);
+        while (true) {
+            for (int i = 0; i < textLength; i++) {
+                // Cycle through the full 360° hue spectrum
+                float hue = (float) i / textLength;
+                int color = Color.HSBtoRGB(hue, 1.0f, 1.0f);
 
-            finalText.append(coloredText(String.valueOf(text.charAt(i)), color, false, false));
+                finalText.append(coloredText(String.valueOf(text.charAt(i)), color, false, false));
+
+                return finalText;
+            }
         }
-
-        return finalText;
     }
 
      // Creates a formatted text object. //

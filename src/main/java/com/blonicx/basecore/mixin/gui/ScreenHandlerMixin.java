@@ -1,6 +1,6 @@
 package com.blonicx.basecore.mixin.gui;
 
-import com.blonicx.basecore.api.minecraft.client.events.items.ItemTransferEvent;
+import com.blonicx.basecore.api.minecraft.events.items.ItemTransferEvent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;

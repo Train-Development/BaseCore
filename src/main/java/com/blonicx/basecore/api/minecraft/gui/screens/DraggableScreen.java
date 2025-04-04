@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.minecraft.client.gui.screens;
+package com.blonicx.basecore.api.minecraft.gui.screens;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.DrawContext;

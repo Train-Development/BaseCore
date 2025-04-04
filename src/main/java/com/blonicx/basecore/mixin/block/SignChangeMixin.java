@@ -1,6 +1,6 @@
 package com.blonicx.basecore.mixin.block;
 
-import com.blonicx.basecore.api.minecraft.client.events.blocks.SignChangeEvent;
+import com.blonicx.basecore.api.minecraft.events.blocks.SignChangeEvent;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.block.entity.SignText;
 import org.spongepowered.asm.mixin.Mixin;

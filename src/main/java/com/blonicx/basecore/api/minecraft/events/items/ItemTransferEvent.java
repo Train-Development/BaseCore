@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.minecraft.client.events.items;
+package com.blonicx.basecore.api.minecraft.events.items;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;

@@ -1,6 +1,6 @@
 package com.blonicx.basecore.mixin.gui;
 
-import com.blonicx.basecore.api.minecraft.client.gui.elements.text.Footer;
+import com.blonicx.basecore.api.minecraft.gui.elements.text.Footer;
 import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextWidget;

@@ -2,7 +2,7 @@ package com.blonicx.basecore.api.hglabor;
 
 import com.blonicx.basecore.BaseCore;
 import com.blonicx.basecore.api.hglabor.enums.ffa.FFAPlayStyles;
-import com.blonicx.basecore.api.minecraft.client.utils.PlayerData;
+import com.blonicx.basecore.api.minecraft.utils.PlayerData;
 import org.json.JSONObject;
 
 import java.io.IOException;

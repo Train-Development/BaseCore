@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.minecraft.client.utils;
+package com.blonicx.basecore.api.minecraft.utils;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

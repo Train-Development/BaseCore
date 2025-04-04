@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.minecraft.client.gui.elements.text;
+package com.blonicx.basecore.api.minecraft.gui.elements.text;
 
 import net.minecraft.text.Text;
 import java.util.function.Supplier;
