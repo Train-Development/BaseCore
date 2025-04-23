@@ -1,22 +1,36 @@
 package com.blonicx.basecore;
 
-import com.blonicx.basecore.api.minecraft.client.events.entity.PlayerClickEvent;
+import com.blonicx.basecore.api.minecraft.events.entity.cow.CowDamageEvent;
+import com.blonicx.basecore.api.minecraft.events.entity.player.PlayerClickEvent;
+import com.blonicx.basecore.api.minecraft.events.entity.player.PlayerDamageEvent;
+import com.blonicx.basecore.api.minecraft.listener.LivingEntityDamageListener;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
-import com.blonicx.basecore.api.utils.placeholder.PlaceholderRegistry;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.world.World;
 
 public class BaseCoreClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        // Registering for ChatMessageEvent //
-        ClientReceiveMessageEvents.CHAT.register((message, signed_message, sender, params, timestamp) -> {
-            // Replace placeholders in the message //
-            PlaceholderRegistry.processString(String.valueOf(message));
+        // Registering for LivingEntityDamageListener //
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            LivingEntityDamageListener.tick((entity, damage) -> {
+                World world = entity.getWorld();
+
+                // Check for specific entity types and invoke responsive events //
+                if (entity instanceof PlayerEntity player) {
+                    PlayerDamageEvent.PLAYER_DAMAGE.invoker().onPlayerDamaged(player, world, damage);
+                } else if (entity instanceof CowEntity cow) {
+                    CowDamageEvent.COW_DAMAGE.invoker().onCowDamaged(cow, world, damage);
+                }
+            });
         });
 
         // Registering the PlayerClickEvent Callbacks //

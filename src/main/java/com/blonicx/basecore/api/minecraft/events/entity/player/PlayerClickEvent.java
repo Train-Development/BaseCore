@@ -1,4 +1,4 @@
-package com.blonicx.basecore.api.minecraft.events.entity;
+package com.blonicx.basecore.api.minecraft.events.entity.player;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
