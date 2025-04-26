@@ -3,7 +3,7 @@
 	"id": "basecore",
 	"version": "${version}",
 	"name": "BaseCore",
-	"description": "This is a Minecraft Library with many utils and gui api.",
+	"description": "This is a minecraft fabric client lib for the Base Universe and other Developers.",
 	"authors": [
 		"Blonicx"
 	],
